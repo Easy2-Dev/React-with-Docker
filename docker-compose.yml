@@ -1,12 +1,14 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  app:
-    build: .
-    image: app:react
+  client:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile
+    image: $CLIENT_APP_NAME
     ports:
-      - "3000:3000"
+      - $CLIENT_APP_PORT:3000
     volumes:
-      - ./src:/app
-    container_name: react-app
+      - $CLIENT_APP_VOLUMES:/app/client
+    container_name: $CLIENT_APP_NAME
     command: npm start
